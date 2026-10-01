@@ -7,6 +7,13 @@ TaskFlow is a production-ready, full-stack task and team collaboration platform 
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend:** [https://task-flow-nu-sooty.vercel.app](https://task-flow-nu-sooty.vercel.app)
+- **Backend API:** [https://taskflow-qlfe.onrender.com](https://taskflow-qlfe.onrender.com)
+
+---
+
 ## 🌟 Key Features & Highlights
 
 - **JWT Authentication & Security**: Secure registration, login, bcrypt password hashing, protected API endpoints, and **Remember Me** session control (30-day token in `localStorage` vs. 1-day session in `sessionStorage`).
@@ -258,7 +265,7 @@ To import into Postman:
    - `PORT`: `5001` (or leave default for Render to assign)
    - `MONGODB_URI`: Your MongoDB Atlas connection URI
    - `JWT_SECRET`: A secure random secret string
-   - `CLIENT_URL`: Your deployed Vercel frontend URL
+   - `CLIENT_URL`: `https://task-flow-nu-sooty.vercel.app`
    - `NODE_ENV`: `production`
 6. *Note on Render Cold Starts*: Free-tier instances spin down after inactivity. Initial API requests may experience a 30–50 second cold start delay.
 
