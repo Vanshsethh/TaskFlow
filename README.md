@@ -131,7 +131,7 @@ SEED_DESIGNER_PASSWORD=set_a_unique_test_password
 
 **Frontend (`frontend/.env`):**
 ```env
-VITE_API_URL=http://localhost:5001
+VITE_API_URL=https://taskflow-qlfe.onrender.com
 ```
 
 ### 3. Install Dependencies
@@ -246,7 +246,7 @@ To import into Postman:
 3. Set **Root Directory** to `frontend`.
 4. Configure Build Command: `npm run build` and Output Directory: `dist`.
 5. Set Environment Variable:
-   - `VITE_API_URL`: Your live Render backend URL (e.g. `https://taskflow-api.onrender.com`).
+   - `VITE_API_URL`: `https://taskflow-qlfe.onrender.com`.
 6. The included `frontend/vercel.json` automatically ensures client-side routes (e.g. `/task-board`, `/dashboard`) resolve smoothly without 404 errors on refresh.
 
 ### Backend Deployment (Render)
