@@ -10,7 +10,6 @@ import {
   Menu,
   X,
   User,
-  Kanban,
   LayoutDashboard,
   ListTodo
 } from 'lucide-react';

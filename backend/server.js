@@ -4,6 +4,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET must be set before starting the server');
+}
+
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');

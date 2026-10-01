@@ -130,7 +130,7 @@ const taskSlice = createSlice({
     setPage: (state, action) => {
       state.pagination.currentPage = action.payload;
     },
-    // Optimistic status update for smooth Drag & Drop Kanban experience
+    // Optimistic status update for a smooth drag-and-drop task board experience
     optimisticUpdateTaskStatus: (state, action) => {
       const { id, status } = action.payload;
       const task = state.tasks.find((t) => t._id === id);

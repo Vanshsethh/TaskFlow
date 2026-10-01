@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   ListTodo,
-  Kanban,
+  Columns3,
   CheckCircle2,
   Clock,
   AlertCircle,
@@ -23,9 +23,9 @@ const navItems = [
     icon: ListTodo
   },
   {
-    name: 'Kanban Board',
-    to: '/kanban',
-    icon: Kanban,
+    name: 'Task Board',
+    to: '/task-board',
+    icon: Columns3,
     badge: 'Drag & Drop'
   }
 ];

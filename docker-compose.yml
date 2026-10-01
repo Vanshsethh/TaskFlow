@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mongodb:
     image: mongo:6-jammy
@@ -11,6 +9,12 @@ services:
       MONGO_INITDB_DATABASE: taskflow
     volumes:
       - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok", "localhost:27017/admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   backend:
     build:
@@ -23,11 +27,18 @@ services:
     environment:
       PORT: 5001
       MONGODB_URI: mongodb://mongodb:27017/taskflow
-      JWT_SECRET: supersecret_taskflow_jwt_key_2026_dev_prod
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET before starting Docker Compose}
       CLIENT_URL: http://localhost:3000
       NODE_ENV: production
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:5001/health').then(response => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   frontend:
     build:
@@ -38,7 +49,8 @@ services:
     ports:
       - "3000:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
 volumes:
   mongo_data:

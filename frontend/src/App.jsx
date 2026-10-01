@@ -10,7 +10,7 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const TasksPage = lazy(() => import('./pages/TasksPage'));
 const TaskDetailsPage = lazy(() => import('./pages/TaskDetailsPage'));
-const KanbanPage = lazy(() => import('./pages/KanbanPage'));
+const TaskBoardPage = lazy(() => import('./pages/TaskBoardPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="tasks" element={<TasksPage />} />
           <Route path="tasks/:id" element={<TaskDetailsPage />} />
-          <Route path="kanban" element={<KanbanPage />} />
+          <Route path="task-board" element={<TaskBoardPage />} />
         </Route>
 
         {/* 404 Route */}

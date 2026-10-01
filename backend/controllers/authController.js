@@ -5,7 +5,7 @@ const generateToken = (id, rememberMe = false) => {
   const expiresIn = rememberMe ? '30d' : '1d';
   return jwt.sign(
     { id },
-    process.env.JWT_SECRET || 'supersecret_taskflow_jwt_key_2026_dev_prod',
+    process.env.JWT_SECRET,
     { expiresIn }
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { CheckSquare, Lock, Mail, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
+import { CheckSquare, Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
 import { loginUserAsync, clearAuthError } from '../store/authSlice';
 import { useForm } from '../hooks/useForm';
 import { useToast } from '../context/ToastContext';
@@ -44,7 +44,6 @@ const LoginPage = () => {
     touched,
     handleChange,
     handleBlur,
-    setValues,
     handleSubmit
   } = useForm(
     {
@@ -63,16 +62,6 @@ const LoginPage = () => {
     } else {
       toast.error(result.payload || 'Login failed');
     }
-  };
-
-  // Pre-fill button for assessment graders / reviewers
-  const handlePrefillDemo = () => {
-    setValues({
-      email: 'testuser@example.com',
-      password: 'Test@1234',
-      rememberMe: true
-    });
-    toast.info('Pre-filled test credentials');
   };
 
   return (
@@ -183,18 +172,6 @@ const LoginPage = () => {
               )}
             </button>
           </form>
-
-          {/* Quick Grader Preset Button */}
-          <div className="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800">
-            <button
-              type="button"
-              onClick={handlePrefillDemo}
-              className="w-full py-2 px-3 rounded-xl border border-dashed border-teal-300 dark:border-teal-700/60 bg-teal-50/50 dark:bg-teal-950/20 text-teal-700 dark:text-teal-300 text-xs font-semibold hover:bg-teal-50 dark:hover:bg-teal-950/40 transition flex items-center justify-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-teal-500" />
-              <span>Use Pre-seeded Test Account (testuser@example.com)</span>
-            </button>
-          </div>
 
           {/* Register Link */}
           <p className="text-center text-xs text-slate-500 dark:text-slate-400 mt-5">

@@ -56,7 +56,7 @@ const getTasks = async (req, res) => {
       .populate('createdBy', 'name email')
       .sort(sortOptions);
 
-    // If 'all' is true, return without pagination limit (useful for Kanban board)
+    // If 'all' is true, return without pagination limit (useful for the task board)
     if (all === 'true' || all === true) {
       const tasks = await taskQuery.exec();
       return res.status(200).json({

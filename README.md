@@ -3,7 +3,7 @@
 [![Stack](https://img.shields.io/badge/Stack-MERN%20%2B%20Vite%20%2B%20Redux%20%2B%20Tailwind-teal.svg)](https://github.com/Vanshsethh/TaskFlow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-TaskFlow is a production-ready, full-stack task and team collaboration platform designed for modern engineering teams. It features real-time task analytics, server-side filtering, interactive Drag & Drop Kanban workflows, dark mode theming, and robust role-aware access controls.
+TaskFlow is a production-ready, full-stack task and team collaboration platform designed for modern engineering teams. It features real-time task analytics, server-side filtering, an interactive drag-and-drop task board, dark mode theming, and robust role-aware access controls.
 
 ---
 
@@ -12,7 +12,7 @@ TaskFlow is a production-ready, full-stack task and team collaboration platform 
 - **JWT Authentication & Security**: Secure registration, login, bcrypt password hashing, protected API endpoints, and **Remember Me** session control (30-day token in `localStorage` vs. 1-day session in `sessionStorage`).
 - **Dashboard & Real-time Metrics**: Metric cards showing Total, Pending, In Progress, and Completed tasks, plus completion rate and overdue tracking.
 - **Bonus 1 — Interactive Charts**: SVG-powered Status Distribution Donut Chart and Priority Breakdown Bar Chart for instant visual health metrics.
-- **Bonus 2 — Drag & Drop Kanban Board**: Native HTML5 Drag & Drop kanban board with optimistic UI updates and immediate database synchronization across workflow stages (`Pending` → `In Progress` → `Completed`).
+- **Bonus 2 — Drag & Drop Task Board**: Native HTML5 drag-and-drop task board with optimistic UI updates and immediate database synchronization across workflow stages (`Pending` → `In Progress` → `Completed`).
 - **Bonus 3 — Dark / Light Mode**: High-contrast, accessibility-tested dark mode with system preference detection and `localStorage` persistence.
 - **Bonus 4 — Docker Containerization**: Multi-stage `Dockerfile` configurations and `docker-compose.yml` for 1-command orchestration of MongoDB, Backend API, and Nginx-served Frontend.
 - **Extra Bonuses — Pagination & Toast Notifications**: Responsive pagination with range counters and floating toast alerts for all user actions and error feedback.
@@ -60,7 +60,7 @@ TaskFlow/
 │   │   ├── hooks/              # Custom hooks (useForm, useDebounce, useTheme)
 │   │   ├── pages/              # Lazy-loaded page views
 │   │   │   ├── DashboardPage.jsx
-│   │   │   ├── KanbanPage.jsx
+│   │   │   ├── TaskBoardPage.jsx
 │   │   │   ├── LoginPage.jsx
 │   │   │   ├── NotFoundPage.jsx
 │   │   │   ├── RegisterPage.jsx
@@ -121,9 +121,12 @@ cd TaskFlow
 ```env
 PORT=5001
 MONGODB_URI=mongodb://127.0.0.1:27017/taskflow
-JWT_SECRET=supersecret_taskflow_jwt_key_2026_dev_prod
+JWT_SECRET=generate_a_unique_secure_random_value
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
+SEED_TEST_USER_PASSWORD=set_a_unique_test_password
+SEED_COLLEAGUE_PASSWORD=set_a_unique_test_password
+SEED_DESIGNER_PASSWORD=set_a_unique_test_password
 ```
 
 **Frontend (`frontend/.env`):**
@@ -165,15 +168,17 @@ npm run dev
 
 ---
 
-## 🔑 Pre-Seeded Working Test Credentials
+## 🔑 Test Credentials
 
-| Role | Email | Password |
-|---|---|---|
-| **Default Reviewer Account** | `testuser@example.com` | `Test@1234` |
-| **Colleague Account (for Assignment)** | `alex.rivera@example.com` | `Alex@1234` |
-| **Designer Account** | `sarah.chen@example.com` | `Sarah@1234` |
+Configure the seed-password environment variables above before running `npm run seed`. The seeded accounts use these email addresses:
 
-> 💡 *Tip: On the Login screen, click the **"Use Pre-seeded Test Account"** button to automatically populate credentials with one click.*
+| Role | Email |
+|---|---|
+| **Default Reviewer Account** | `testuser@example.com` |
+| **Colleague Account (for Assignment)** | `alex.rivera@example.com` |
+| **Designer Account** | `sarah.chen@example.com` |
+
+Do not commit passwords. Store the deployed reviewer password securely and share it only with the intended evaluator.
 
 ---
 
@@ -183,7 +188,7 @@ To run the complete stack including MongoDB, Backend, and Frontend in Docker:
 
 ```bash
 # From project root
-docker-compose up --build
+JWT_SECRET="your-secure-random-value" docker compose up --build
 ```
 
 - Frontend: `http://localhost:3000`
@@ -242,7 +247,7 @@ To import into Postman:
 4. Configure Build Command: `npm run build` and Output Directory: `dist`.
 5. Set Environment Variable:
    - `VITE_API_URL`: Your live Render backend URL (e.g. `https://taskflow-api.onrender.com`).
-6. The included `frontend/vercel.json` automatically ensures client-side routes (e.g. `/kanban`, `/dashboard`) resolve smoothly without 404 errors on refresh.
+6. The included `frontend/vercel.json` automatically ensures client-side routes (e.g. `/task-board`, `/dashboard`) resolve smoothly without 404 errors on refresh.
 
 ### Backend Deployment (Render)
 1. Create a **New Web Service** on [Render](https://render.com) connected to your repo.

@@ -5,6 +5,20 @@ const Task = require('../models/Task');
 
 const seedData = async () => {
   try {
+    const requiredSeedSecrets = [
+      'SEED_TEST_USER_PASSWORD',
+      'SEED_COLLEAGUE_PASSWORD',
+      'SEED_DESIGNER_PASSWORD'
+    ];
+    const missingSeedSecrets = requiredSeedSecrets.filter(
+      (name) => !process.env[name]
+    );
+    if (missingSeedSecrets.length > 0) {
+      throw new Error(
+        `Missing required seed environment variables: ${missingSeedSecrets.join(', ')}`
+      );
+    }
+
     const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/taskflow';
     console.log(`[Seed] Connecting to MongoDB: ${mongoUri}...`);
     await mongoose.connect(mongoUri);
@@ -19,21 +33,21 @@ const seedData = async () => {
     const primaryUser = await User.create({
       name: 'Vansh Seth',
       email: 'testuser@example.com',
-      password: 'Test@1234'
+      password: process.env.SEED_TEST_USER_PASSWORD
     });
 
     // Secondary user for team assignment demonstration
     const teammateUser = await User.create({
       name: 'Alex Rivera',
       email: 'alex.rivera@example.com',
-      password: 'Alex@1234'
+      password: process.env.SEED_COLLEAGUE_PASSWORD
     });
 
     // Third user for diverse team collaboration
     const designerUser = await User.create({
       name: 'Sarah Chen',
       email: 'sarah.chen@example.com',
-      password: 'Sarah@1234'
+      password: process.env.SEED_DESIGNER_PASSWORD
     });
 
     console.log('[Seed] Users created:');
@@ -64,8 +78,8 @@ const seedData = async () => {
         createdBy: primaryUser._id
       },
       {
-        title: 'Build Drag & Drop Kanban task board',
-        description: 'Interactive Kanban board allowing team members to drag task cards between Pending, In Progress, and Completed columns with optimistic updates.',
+        title: 'Build Drag & Drop Task Board',
+        description: 'Interactive task board allowing team members to drag task cards between Pending, In Progress, and Completed columns with optimistic updates.',
         priority: 'High',
         status: 'In Progress',
         dueDate: addDays(3),
@@ -126,7 +140,7 @@ const seedData = async () => {
     console.log('----------------------------------------------------');
     console.log('Test Credentials:');
     console.log('  Email:    testuser@example.com');
-    console.log('  Password: Test@1234');
+    console.log('  Password: Set in SEED_TEST_USER_PASSWORD');
     console.log('----------------------------------------------------');
 
     await mongoose.connection.close();

@@ -46,7 +46,7 @@ const COLUMNS = [
   }
 ];
 
-const KanbanPage = () => {
+const TaskBoardPage = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const { tasks, loading } = useSelector((state) => state.tasks);
@@ -60,14 +60,14 @@ const KanbanPage = () => {
   const [defaultStatusForNew, setDefaultStatusForNew] = useState('Pending');
   const [isSaving, setIsSaving] = useState(false);
 
-  // Load all tasks for Kanban board
-  const loadKanbanTasks = useCallback(() => {
+  // Load all tasks for the task board
+  const loadTaskBoardTasks = useCallback(() => {
     dispatch(fetchTasksAsync({ all: true, sort: 'createdAt:desc' }));
   }, [dispatch]);
 
   useEffect(() => {
-    loadKanbanTasks();
-  }, [loadKanbanTasks]);
+    loadTaskBoardTasks();
+  }, [loadTaskBoardTasks]);
 
   // Filter tasks locally by search query if user types in search
   const filteredTasks = useMemo(() => {
@@ -144,7 +144,7 @@ const KanbanPage = () => {
     } else {
       toast.error(result.payload || 'Failed to update task status');
       // Revert if error
-      loadKanbanTasks();
+      loadTaskBoardTasks();
     }
   };
 
@@ -207,7 +207,7 @@ const KanbanPage = () => {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Kanban Board
+              Task Board
             </h1>
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-brand-500" />
@@ -227,13 +227,13 @@ const KanbanPage = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search kanban..."
+              placeholder="Search task board..."
               className="pl-9 pr-3 py-1.5 rounded-xl text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 w-44 sm:w-56"
             />
           </div>
 
           <button
-            onClick={loadKanbanTasks}
+            onClick={loadTaskBoardTasks}
             className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
             title="Refresh board"
             aria-label="Refresh board"
@@ -244,9 +244,9 @@ const KanbanPage = () => {
       </div>
 
       {loading && tasks.length === 0 ? (
-        <LoadingSpinner text="Loading Kanban columns..." />
+        <LoadingSpinner text="Loading task board columns..." />
       ) : (
-        /* Kanban Columns Grid */
+        /* Task Board Columns Grid */
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {COLUMNS.map((col) => {
             const ColumnIcon = col.icon;
@@ -337,4 +337,4 @@ const KanbanPage = () => {
   );
 };
 
-export default KanbanPage;
+export default TaskBoardPage;

@@ -80,7 +80,7 @@ Dark Mode · Pagination · Infinite Scroll · Charts · Drag & Drop · File Uplo
 - [ ] Live backend (Render)
 - [ ] README: setup, tech stack, API docs, screenshots, folder structure, live URLs, credentials
 - [ ] API collection (Postman/Bruno)
-- [ ] Pre-seeded working credentials: `testuser@example.com` / `Test@1234` (User), `admin@example.com` / `Admin@1234` (Admin, if applicable) — **replace with real ones**
+- [ ] Pre-seeded working credentials: configure unique deployment-only credentials for the evaluator — **do not commit passwords**
 
 ---
 
@@ -187,7 +187,7 @@ Reply with e.g. `1A 2A 3B ...`. **★ = my default if you say "go with defaults"
 | 17 | UI libs | Pure Tailwind |
 
 **Extra endpoints beyond spec:** `GET /users`, `GET /tasks/stats`
-**Credentials to seed:** `testuser@example.com` / `Test@1234` (admin account dropped)
+**Credentials to seed:** configure a deployment-only password for `testuser@example.com` (admin account dropped)
 
 **Also fixed:** Status enum = `Pending` / `In Progress` / `Completed` (matches dashboard cards)
 **Deploy notes:** `vercel.json` SPA rewrite · CORS allow Vercel URL on Render · note Render cold start in README · Docker kept local

@@ -17,6 +17,21 @@
       "type": "string"
     },
     {
+      "key": "testUserEmail",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "testUserPassword",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "newUserPassword",
+      "value": "",
+      "type": "string"
+    },
+    {
       "key": "taskId",
       "value": "",
       "type": "string"
@@ -43,7 +58,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"New Team Member\",\n  \"email\": \"newmember@example.com\",\n  \"password\": \"Member@1234\"\n}"
+              "raw": "{\n  \"name\": \"New Team Member\",\n  \"email\": \"newmember@example.com\",\n  \"password\": \"{{newUserPassword}}\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/register",
@@ -53,7 +68,7 @@
           }
         },
         {
-          "name": "Login User (Default Test Credentials)",
+          "name": "Login User (Set collection test-user variables first)",
           "event": [
             {
               "listen": "test",
@@ -79,7 +94,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"Test@1234\",\n  \"rememberMe\": true\n}"
+              "raw": "{\n  \"email\": \"{{testUserEmail}}\",\n  \"password\": \"{{testUserPassword}}\",\n  \"rememberMe\": true\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/login",

@@ -123,7 +123,7 @@ const TaskModal = ({ isOpen, onClose, onSave, task = null, isSaving = false }) =
               value={values.title}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="e.g. Implement drag & drop kanban"
+              placeholder="e.g. Implement drag & drop task board"
               className={`w-full px-3.5 py-2.5 rounded-xl border text-sm bg-white dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition ${
                 touched.title && errors.title
                   ? 'border-rose-400 dark:border-rose-500 focus:ring-rose-500'
