@@ -41,7 +41,7 @@ TaskFlow is a production-ready, full-stack task and team collaboration platform 
 
 ```
 TaskFlow/
-├── client/                     # Frontend Application (React + Vite)
+├── frontend/                   # Frontend Application (React + Vite)
 │   ├── public/                 # Static assets & favicon
 │   ├── src/
 │   │   ├── components/         # Reusable UI components
@@ -68,6 +68,10 @@ TaskFlow/
 │   │   │   └── TasksPage.jsx
 │   │   ├── services/           # Axios API services (auth, tasks, users)
 │   │   ├── store/              # Redux Toolkit store and slices
+│   │   ├── utils/              # Application constants & formatters
+│   │   │   ├── constants.js
+│   │   │   ├── formatters.js
+│   │   │   └── index.js
 │   │   ├── App.jsx             # Route definitions with Suspense
 │   │   ├── index.css           # Tailwind base styles and dark mode layer
 │   │   └── main.jsx            # Application root
@@ -76,7 +80,7 @@ TaskFlow/
 │   ├── tailwind.config.js      # Tailwind configuration
 │   └── vercel.json             # Vercel SPA rewrite configuration
 │
-├── server/                     # Backend Application (Node.js + Express)
+├── backend/                    # Backend Application (Node.js + Express)
 │   ├── config/
 │   │   └── db.js               # MongoDB connection handler
 │   ├── controllers/            # Request handlers (auth, tasks, users)
@@ -113,7 +117,7 @@ cd TaskFlow
 
 ### 2. Configure Environment Variables
 
-**Server (`server/.env`):**
+**Backend (`backend/.env`):**
 ```env
 PORT=5001
 MONGODB_URI=mongodb://127.0.0.1:27017/taskflow
@@ -122,24 +126,24 @@ CLIENT_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
-**Client (`client/.env`):**
+**Frontend (`frontend/.env`):**
 ```env
 VITE_API_URL=http://localhost:5001
 ```
 
 ### 3. Install Dependencies
 ```bash
-# Install server dependencies
-cd server && npm install
+# Install backend dependencies
+cd backend && npm install
 
-# Install client dependencies
-cd ../client && npm install
+# Install frontend dependencies
+cd ../frontend && npm install
 ```
 
 ### 4. Seed the Database
 Run the pre-configured seed script to populate users and realistic demo tasks:
 ```bash
-cd server
+cd backend
 npm run seed
 ```
 
@@ -147,14 +151,14 @@ npm run seed
 
 In **Terminal 1** (Backend):
 ```bash
-cd server
+cd backend
 npm start
 # Server listens on http://localhost:5001
 ```
 
 In **Terminal 2** (Frontend):
 ```bash
-cd client
+cd frontend
 npm run dev
 # Vite runs on http://localhost:5173
 ```
@@ -188,7 +192,7 @@ docker-compose up --build
 
 To run database seeding inside the Docker network:
 ```bash
-docker-compose exec server npm run seed
+docker-compose exec backend npm run seed
 ```
 
 ---
@@ -234,15 +238,15 @@ To import into Postman:
 ### Frontend Deployment (Vercel)
 1. Push your repository to GitHub.
 2. Link the repository in [Vercel](https://vercel.com).
-3. Set **Root Directory** to `client`.
+3. Set **Root Directory** to `frontend`.
 4. Configure Build Command: `npm run build` and Output Directory: `dist`.
 5. Set Environment Variable:
    - `VITE_API_URL`: Your live Render backend URL (e.g. `https://taskflow-api.onrender.com`).
-6. The included `client/vercel.json` automatically ensures client-side routes (e.g. `/kanban`, `/dashboard`) resolve smoothly without 404 errors on refresh.
+6. The included `frontend/vercel.json` automatically ensures client-side routes (e.g. `/kanban`, `/dashboard`) resolve smoothly without 404 errors on refresh.
 
 ### Backend Deployment (Render)
 1. Create a **New Web Service** on [Render](https://render.com) connected to your repo.
-2. Set **Root Directory** to `server`.
+2. Set **Root Directory** to `backend`.
 3. Set **Build Command**: `npm install`.
 4. Set **Start Command**: `node server.js`.
 5. Add Environment Variables:

@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "TaskFlow — Task & Team Management Platform",
   "scripts": {
-    "install:server": "cd server && npm install",
-    "install:client": "cd client && npm install",
-    "install:all": "npm run install:server && npm run install:client",
-    "seed": "cd server && npm run seed",
-    "server": "cd server && npm start",
-    "client": "cd client && npm run dev",
-    "build:client": "cd client && npm run build"
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "seed": "cd backend && npm run seed",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "npm run backend"
   },
   "keywords": [
     "taskflow",

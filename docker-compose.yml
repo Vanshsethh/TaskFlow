@@ -12,11 +12,11 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  server:
+  backend:
     build:
-      context: ./server
+      context: ./backend
       dockerfile: Dockerfile
-    container_name: taskflow-server
+    container_name: taskflow-backend
     restart: always
     ports:
       - "5001:5001"
@@ -29,16 +29,16 @@ services:
     depends_on:
       - mongodb
 
-  client:
+  frontend:
     build:
-      context: ./client
+      context: ./frontend
       dockerfile: Dockerfile
-    container_name: taskflow-client
+    container_name: taskflow-frontend
     restart: always
     ports:
       - "3000:80"
     depends_on:
-      - server
+      - backend
 
 volumes:
   mongo_data:
