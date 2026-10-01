@@ -12,6 +12,7 @@ import {
   GripVertical
 } from 'lucide-react';
 import { useSelector } from 'react-redux';
+import { formatDate, isTaskOverdue } from '../utils/formatters';
 
 const priorityBadges = {
   High: 'bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border-rose-200 dark:border-rose-900',
@@ -44,16 +45,9 @@ const TaskCard = ({
   const creatorId = task.createdBy?._id || task.createdBy;
   const isCreator = currentUser && creatorId && String(creatorId) === String(currentUser._id);
 
-  // Format Due Date
-  const dueDateObj = new Date(task.dueDate);
-  const isOverdue =
-    task.status !== 'Completed' &&
-    dueDateObj < new Date(new Date().setHours(0, 0, 0, 0));
-  const formattedDate = dueDateObj.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
+  // Format Due Date using utilities
+  const isOverdue = isTaskOverdue(task.dueDate, task.status);
+  const formattedDate = formatDate(task.dueDate);
 
   const StatusIcon = statusIcons[task.status] || Clock;
 

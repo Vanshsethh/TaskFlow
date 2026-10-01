@@ -17,6 +17,7 @@ import {
 import { useTheme } from '../context/ThemeContext';
 import { logout } from '../store/authSlice';
 import { useToast } from '../context/ToastContext';
+import { getInitials } from '../utils/formatters';
 
 const Navbar = ({ onOpenNewTask, onToggleMobileSidebar }) => {
   const { isDark, toggleTheme } = useTheme();
@@ -32,15 +33,7 @@ const Navbar = ({ onOpenNewTask, onToggleMobileSidebar }) => {
     navigate('/login');
   };
 
-  // Get user initials
-  const initials = user?.name
-    ? user.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-    : 'U';
+  const initials = getInitials(user?.name);
 
   return (
     <header className="sticky top-0 z-30 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-colors duration-200">
