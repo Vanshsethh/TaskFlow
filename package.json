@@ -1,0 +1,25 @@
+{
+  "name": "taskflow-workspace",
+  "version": "1.0.0",
+  "description": "TaskFlow — Task & Team Management Platform",
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "seed": "cd server && npm run seed",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build"
+  },
+  "keywords": [
+    "taskflow",
+    "react",
+    "vite",
+    "express",
+    "mongodb",
+    "redux-toolkit",
+    "tailwind"
+  ],
+  "author": "Vansh Seth",
+  "license": "MIT"
+}
